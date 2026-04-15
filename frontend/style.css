@@ -1,0 +1,27 @@
+*{
+    margin: 0px;
+    border: opx;
+
+}
+.container{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 900px;
+    width: 900px;
+    align-items: center;
+}
+
+body{
+    background-color: antiquewhite;
+    display: flex;
+    justify-content: center;
+}
+button{
+  
+    width : 25vh;
+    height: 25vh;
+    margin: 5px;
+    margin-bottom: 10px;
+}
+
