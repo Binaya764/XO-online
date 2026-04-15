@@ -10,6 +10,8 @@
     height: 900px;
     width: 900px;
     align-items: center;
+    
+
 }
 
 body{
@@ -17,11 +19,19 @@ body{
     display: flex;
     justify-content: center;
 }
-button{
+.box{
   
     width : 25vh;
     height: 25vh;
     margin: 5px;
     margin-bottom: 10px;
+    border-radius: 1rem;
+    border: none;
+    box-shadow: 0 0 5px;
+    font-size: 8vmin;
+}
+#reset{
+    width: 10vh;
+    height: 6vh;
 }
 
