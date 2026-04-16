@@ -11,11 +11,42 @@ const winningPattern= [
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
         console.log("box was clicked");
+        if(turn_x){
+            box.innerText = "X";
+            turn_x = false;
+        }
+        else{
+            box.innerText = "O";
+            turn_x = true;
+        }
+        box.disabled = true;
+        check_winner();
     });
 });
 
- function clicke(){
-    console.log("reset button clicked");
+function check_winner(){
+    for(let pattern of winningPattern){
+        let pos1 = boxes[pattern[0]].innerText;
+        let pos2 = boxes[pattern[1]].innerText;
+        let pos3 = boxes[pattern[2]].innerText;
+
+        if(pos1 != "" && pos2 != "" && pos3 != ""){
+            if(pos1 === pos2 && pos2 === pos3){
+                console.log("winner",pos1);
+                boxes.forEach(box => box.disabled = true);
+                
+               
+              
+            }
+        }
+    }
 }
 
-reset_btn.addEventListener("onclick",clicke());
+
+reset_btn.addEventListener("click",()=>{
+    console.log("Reset button clicked");
+    boxes.forEach((box)=>{
+        box.innerText = "";
+        box.disabled = false;
+    });
+});
