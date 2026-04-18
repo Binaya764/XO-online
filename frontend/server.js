@@ -1,6 +1,7 @@
 let boxes = document.querySelectorAll(".box");
 let reset_btn = document.querySelector("#reset");
 let turn_x = true; //players
+let game_mode = "";
 
 const winningPattern= [
     [0,1,2],[0,3,6],[0,4,8], [1,4,7], [2,5,8], [2,4,6],
@@ -43,10 +44,38 @@ function check_winner(){
 }
 
 
-reset_btn.addEventListener("click",()=>{
-    console.log("Reset button clicked");
+reset_btn.addEventListener("click",reset_game());
+
+function reset_game(){
     boxes.forEach((box)=>{
         box.innerText = "";
         box.disabled = false;
-    });
-});
+    })
+}
+
+function show_difficulty_menu(){
+    document.getElementById('main_menu').style.display= 'none';
+    document.getElementById('difficulty').style.display = 'flex';
+
+}
+function multiplayer(){
+    document.getElementById('main_menu').style.display = 'none';
+    document.getElementById('difficulty').style.display = 'none';
+    document.getElementById('game_screen').style.display = 'flex';
+
+}
+
+function start_game(mode){
+    gameMode = mode;
+    document.getElementById('main_menu').style.display = 'none';
+    document.getElementById('difficulty').style.display = 'none';
+    document.getElementById('game_screen').style.display = 'flex';
+    reset_game();
+}
+
+function back_to_main(){
+    document.getElementById('main_menu').style.display = 'flex';
+    document.getElementById('difficulty').style.display = 'none';
+    document.getElementById('game_screen').style.display = 'none';
+
+}

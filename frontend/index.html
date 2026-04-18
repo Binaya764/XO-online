@@ -7,26 +7,39 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1 id = "heading">Tic Tac Toe</h1>
-    <div class = "container">
-       
-        <div class = "game">
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-            <button class ="box"></button>
-           
-        </div>
-       
-
+    <div id = "main_menu" class = "screen">
+        <h1 id = "heading">Tic Tac Toe</h1>
+        <button onclick="show_difficulty_menu()" class = "normal">Single Player</button>
+        <button onclick = "multiplayer()"class = "normal">Multiplayer</button>
     </div>
-    <button id ="reset">Reset</button>
+
+    <div id = "difficulty" class ="screen" style = "display: none;">
+        <h2>Select Difficulty</h2>
+        <button onclick = "easy_mode('easy')" class = "normal">Easy</button>
+        <button onclick = "hard_mode('hard')" class = "normal">Hard</button>
+        <button onclick = "back_to_main()" class = "normal">Back</button>
+    </div>
+    <div id = "game_screen" class = "screen" style = "display: none;">
+        <div class = "container">
         
+            <div class = "game">
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+            
+            </div>
+        
+
+        </div>
+        <button id ="reset">Reset</button>
+        <button onclick = "back_to_main()" id = "back_btn">Back</button>
+    </div>
 </body>
 <script src ="server.js"></script>
 </html>
