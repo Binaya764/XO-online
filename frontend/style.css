@@ -84,6 +84,8 @@ body{
     border: 1px solid #333;
     background: white;
     transition: 0.2s;
+    margin: 1vh;
+
 }
 #reset{
 
@@ -107,3 +109,5 @@ body{
     box-shadow: 0 0 2px;
     margin-top: 2vh;
 }
+
+

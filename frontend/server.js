@@ -21,10 +21,24 @@ boxes.forEach((box) => {
             turn_x = true;
         }
         box.disabled = true;
-        check_winner();
+        let win = check_winner();
+        
+        if(win == "winner"){
+
+       
+             winner_screen();
+             console.log("winner screen called");
+           
+        };
+        
+           
     });
 });
-
+function winner_screen(){
+     const screen = document.getElementById('winner');
+            screen.style.display = 'flex';
+            document.getElementById('game_screen').style.display = 'none';
+}
 function check_winner(){
     for(let pattern of winningPattern){
         let pos1 = boxes[pattern[0]].innerText;
@@ -35,19 +49,23 @@ function check_winner(){
             if(pos1 === pos2 && pos2 === pos3){
                 console.log("winner",pos1);
                 boxes.forEach(box => box.disabled = true);
-                
-               
-              
+                return "winner"             
             }
         }
     }
 }
 
 
+
+
 reset_btn.addEventListener("click",reset_game());
 
 function reset_game(){
     boxes.forEach((box)=>{
+        document.getElementById('main_menu').style.display = 'none';
+        document.getElementById('difficulty').style.display = 'none';
+        document.getElementById('game_screen').style.display = 'flex';
+        document.getElementById('winner').style.display = 'none';
         box.innerText = "";
         box.disabled = false;
     })
