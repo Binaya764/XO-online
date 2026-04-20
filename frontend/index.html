@@ -7,10 +7,7 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id ="winner" class = "screen" style ="display: none">
-        <h1>WINNER !</h1>
-        <button onclick="reset_game()" class = "normal">Play Again</button>
-    </div>
+   
     <div id = "main_menu" class = "screen">
         <h1 id = "heading">Tic Tac Toe</h1>
         <button onclick="show_difficulty_menu()" class = "normal">Single Player</button>
@@ -43,6 +40,13 @@
         </div>
         <button onclick = "reset_game()" id ="reset" class = "normal">Reset</button>
         <button onclick = "back_to_main()" id = "back_btn" class = "normal">Back</button>
+    </div>
+     <div id ="winner" class = "screen" style ="display: none">
+        <h1>WINNER !</h1>
+        <button onclick="reset_game()" class = "normal">Play Again</button>
+    </div>
+    <div id = "draw" class = "screen" style = "display: none">
+        <h1>DRAW!</h1>
     </div>
 </body>
 <script src ="server.js"></script>

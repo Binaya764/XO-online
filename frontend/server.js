@@ -1,7 +1,7 @@
 let boxes = document.querySelectorAll(".box");
 let reset_btn = document.querySelector("#reset");
 let turn_x = true; //players
-let game_mode = "";
+let gameMode= "";
 
 const winningPattern= [
     [0,1,2],[0,3,6],[0,4,8], [1,4,7], [2,5,8], [2,4,6],
@@ -25,20 +25,31 @@ boxes.forEach((box) => {
         
         if(win == "winner"){
 
-       
-             winner_screen();
+       setTimeout(()=>winner_screen(),3000);
              console.log("winner screen called");
            
-        };
+        }else{
+            if([...boxes].every((box)=> box.innerText !== ""))
+            setTimeout(()=>draw_screen(),2000);
+            console.log("draw")
+        }
         
            
     });
 });
 function winner_screen(){
+    
      const screen = document.getElementById('winner');
             screen.style.display = 'flex';
             document.getElementById('game_screen').style.display = 'none';
+    
 }
+function draw_screen(){
+    const screen = document.getElementById('draw');
+    screen.style.display = 'flex';
+    document.getElementById('game_screen').style.display = 'none';
+}
+
 function check_winner(){
     for(let pattern of winningPattern){
         let pos1 = boxes[pattern[0]].innerText;
@@ -58,17 +69,17 @@ function check_winner(){
 
 
 
-reset_btn.addEventListener("click",reset_game());
+reset_btn.addEventListener("click",reset_game);
 
 function reset_game(){
     boxes.forEach((box)=>{
-        document.getElementById('main_menu').style.display = 'none';
-        document.getElementById('difficulty').style.display = 'none';
-        document.getElementById('game_screen').style.display = 'flex';
-        document.getElementById('winner').style.display = 'none';
         box.innerText = "";
         box.disabled = false;
     })
+    document.getElementById('main_menu').style.display = 'none';
+    document.getElementById('difficulty').style.display = 'none';
+    document.getElementById('game_screen').style.display = 'flex';
+    document.getElementById('winner').style.display = 'none';
 }
 
 function show_difficulty_menu(){
