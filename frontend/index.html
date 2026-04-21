@@ -16,8 +16,8 @@
 
     <div id = "difficulty" class ="screen" style = "display: none;">
         <h2>Select Difficulty</h2>
-        <button onclick = "easy_mode('easy')" class = "normal">Easy</button>
-        <button onclick = "hard_mode('hard')" class = "normal">Hard</button>
+        <button onclick = "start_game('easy')" class = "normal">Easy</button>
+        <button onclick = "start_game('hard')" class = "normal">Hard</button>
         <button onclick = "back_to_main()" class = "normal">Back</button>
     </div>
     <div id = "game_screen" class = "screen" style = "display: none;">
@@ -47,6 +47,8 @@
     </div>
     <div id = "draw" class = "screen" style = "display: none">
         <h1>DRAW!</h1>
+        <button onclick="reset_game()" class = "normal">Play Again</button>
+    
     </div>
 </body>
 <script src ="server.js"></script>

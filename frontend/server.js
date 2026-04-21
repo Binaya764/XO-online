@@ -11,15 +11,26 @@ const winningPattern= [
 
 boxes.forEach((box) => {
     box.addEventListener("click", () => {
+        //prevents clicking if the box is already filled
+        if (box.innerText !== ""){
+            return;
+        }
         console.log("box was clicked");
+
         if(turn_x){
             box.innerText = "X";
             turn_x = false;
-        }
-        else{
-            box.innerText = "O";
-            turn_x = true;
-        }
+            
+        
+        if(gameMode == "easy" && !check_winner()){
+            document.querySelector(".container").style.pointerEvents = "none";
+            setTimeout(()=>{
+                ai_easy();
+                
+                document.querySelector(".container").style.pointerEvents = "auto";
+                
+            },700);
+        } 
         box.disabled = true;
         let win = check_winner();
         
@@ -32,11 +43,12 @@ boxes.forEach((box) => {
             if([...boxes].every((box)=> box.innerText !== ""))
             setTimeout(()=>draw_screen(),2000);
             console.log("draw")
-        }
-        
-           
+        }     
+    }
     });
 });
+
+
 function winner_screen(){
     
      const screen = document.getElementById('winner');
@@ -80,6 +92,9 @@ function reset_game(){
     document.getElementById('difficulty').style.display = 'none';
     document.getElementById('game_screen').style.display = 'flex';
     document.getElementById('winner').style.display = 'none';
+    document.getElementById('draw').style.display = 'none';
+   
+    turn_x = true;
 }
 
 function show_difficulty_menu(){
@@ -107,4 +122,22 @@ function back_to_main(){
     document.getElementById('difficulty').style.display = 'none';
     document.getElementById('game_screen').style.display = 'none';
 
+}
+
+function ai_easy(){
+    let available_boxes = [...boxes].filter(box => box.innerText === "");
+    if(available_boxes.length > 0){
+        let random_box = available_boxes[Math.floor(Math.random()* available_boxes.length)];
+        //math.random generates decimal between 0 and 1
+        random_box.innerText = "O";
+        random_box.disabled = true;
+        turn_x = true;
+
+        if(check_winner() === "winner"){
+            setTimeout(()=> winner_screen(), 3000);
+
+        }else if ([...boxes].every(box => box.innerText != "")){
+            setTimeout(()=> draw_screen(), 3000);
+        }
+    }
 }
