@@ -30,7 +30,15 @@ boxes.forEach((box) => {
                 document.querySelector(".container").style.pointerEvents = "auto";
                 
             },700);
-        } 
+
+        } else if (gameMode === "hard" && !check_winner()) {
+        document.querySelector(".container").style.pointerEvents = "none";
+        setTimeout(() => {
+            ai_hard();
+            document.querySelector(".container").style.pointerEvents = "auto";
+        }, 500);
+}
+        
         box.disabled = true;
         let win = check_winner();
         
@@ -140,4 +148,81 @@ function ai_easy(){
             setTimeout(()=> draw_screen(), 3000);
         }
     }
+}
+
+function ai_hard() {
+    // 1. Convert DOM boxes to a simple array
+    let currentBoard = Array.from(boxes).map(box => box.innerText);
+    
+    let bestScore = -Infinity;
+    let move;
+
+    // 2. Find the best index
+    for (let i = 0; i < 9; i++) {
+        if (currentBoard[i] === "") {
+            currentBoard[i] = "O";
+            let score = minimax(currentBoard, 0, false);
+            currentBoard[i] = "";
+            if (score > bestScore) {
+                bestScore = score;
+                move = i;
+            }
+        }
+    }
+
+    // 3. Execute the best move
+    if (move !== undefined) {
+        let chosenBox = boxes[move];
+        chosenBox.innerText = "O";
+        chosenBox.disabled = true;
+        turn_x = true;
+
+        if (check_winner() === "winner") {
+            setTimeout(() => winner_screen(), 1000);
+        } else if ([...boxes].every(box => box.innerText !== "")) {
+            setTimeout(() => draw_screen(), 1000);
+        }
+    }
+}
+
+function minimax(board, depth, isMaximizing) {
+    let result = checkWinnerState(board);
+    if (result === "O") return 10 - depth; // AI wins (depth helps pick the fastest win)
+    if (result === "X") return depth - 10; // Human wins
+    if (result === "draw") return 0;
+
+    if (isMaximizing) {
+        let bestScore = -Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === "") {
+                board[i] = "O"; // Simulate move
+                let score = minimax(board, depth + 1, false);
+                board[i] = ""; // Undo move
+                bestScore = Math.max(score, bestScore);
+            }
+        }
+        return bestScore;
+    } else {
+        let bestScore = Infinity;
+        for (let i = 0; i < 9; i++) {
+            if (board[i] === "") {
+                board[i] = "X";
+                let score = minimax(board, depth + 1, true);
+                board[i] = "";
+                bestScore = Math.min(score, bestScore);
+            }
+        }
+        return bestScore;
+    }
+}
+
+function checkWinnerState(board) {
+    for (let pattern of winningPattern) {
+        let [a, b, c] = pattern;
+        if (board[a] && board[a] === board[b] && board[a] === board[c]) {
+            return board[a]; // Returns 'X' or 'O'
+        }
+    }
+    if (board.every(cell => cell !== "")) return "draw";
+    return null; // Game still going
 }
