@@ -1,6 +1,6 @@
 # XO-online
 
-A full-stack Tic-Tac-Toe application featuring an unbeatable AI, local multiplayer, and a persistent global leaderboard.
+A full-stack Tic-Tac-Toe application featuring an unbeatable AI and local multiplayer.
 
 ## Overview
 XO-online is designed to showcase core web development concepts, algorithmic logic, and backend integration. It allows users to play against a friend locally or challenge an AI at different difficulty levels.
@@ -11,7 +11,6 @@ XO-online is designed to showcase core web development concepts, algorithmic log
   - **Hard Mode**: Powered by the Minimax Algorithm—it is mathematically unbeatable.
 - **Multiplayer (PvP)**: Classic 1v1 local play.
 - **Dynamic UI**: Responsive design with state-managed screens (Main Menu, Difficulty, Game Board, and Results).
-- **Persistent Leaderboard**: Stores match outcomes in a MongoDB database to track global win statistics.
 - **WSL Optimized**: Developed and tested in a Linux environment via Windows Subsystem for Linux.
 
 ## Tech Stack
