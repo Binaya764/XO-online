@@ -2,6 +2,7 @@ let boxes = document.querySelectorAll(".box");
 let reset_btn = document.querySelector("#reset");
 let turn_x = true; //players
 let gameMode= "";
+let moveCount = 0;
 
 const winningPattern= [
     [0,1,2],[0,3,6],[0,4,8], [1,4,7], [2,5,8], [2,4,6],
@@ -15,6 +16,7 @@ boxes.forEach((box) => {
         if (box.innerText !== ""){
             return;
         }
+        moveCount++;
         console.log("box was clicked");
 
         if(turn_x){
@@ -80,6 +82,7 @@ function check_winner(){
             if(pos1 === pos2 && pos2 === pos3){
                 console.log("winner",pos1);
                 boxes.forEach(box => box.disabled = true);
+                saveGameResult(pos1, moveCount);
                 return "winner"             
             }
         }
@@ -225,4 +228,24 @@ function checkWinnerState(board) {
     }
     if (board.every(cell => cell !== "")) return "draw";
     return null; // Game still going
+}
+
+async function saveGameResult(winnerName, totalMoves) {
+    try {
+        const response = await fetchfetch('http://127.0.0.1:5000/game-result', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                winner: winnerName,
+                moves: totalMoves
+            })
+        });
+
+        const data = await response.json();
+        console.log("Server says:", data.message);
+    } catch (error) {
+        console.error("Error connecting to backend:", error);
+    }
 }
