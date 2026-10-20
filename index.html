@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tic Tac Toe</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   
+    <div id = "main_menu" class = "screen">
+        <h1 id = "heading">Tic Tac Toe</h1>
+        <button onclick="show_difficulty_menu()" class = "normal">Single Player</button>
+        <button onclick = "multiplayer()"class = "normal">Multiplayer</button>
+    </div>
+
+    <div id = "difficulty" class ="screen" style = "display: none;">
+        <h2>Select Difficulty</h2>
+        <button onclick = "start_game('easy')" class = "normal">Easy</button>
+        <button onclick = "start_game('hard')" class = "normal">Hard</button>
+        <button onclick = "back_to_main()" class = "normal">Back</button>
+    </div>
+    <div id = "game_screen" class = "screen" style = "display: none;">
+        <div class = "container">
+        
+            <div class = "game">
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+                <button class ="box"></button>
+            
+            </div>
+        
+
+        </div>
+        <button onclick = "reset_game()" id ="reset" class = "normal">Reset</button>
+        <button onclick = "back_to_main()" id = "back_btn" class = "normal">Back</button>
+    </div>
+     <div id ="winner" class = "screen" style ="display: none">
+        <h1>WINNER !</h1>
+        <button onclick="reset_game()" class = "normal">Play Again</button>
+    </div>
+    <div id = "draw" class = "screen" style = "display: none">
+        <h1>DRAW!</h1>
+        <button onclick="reset_game()" class = "normal">Play Again</button>
+    
+    </div>
+</body>
+<script src ="server.js"></script>
+</html>
