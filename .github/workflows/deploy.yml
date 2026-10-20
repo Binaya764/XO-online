@@ -2,7 +2,11 @@ name: Deploy Tic Tac Toe
 
 on:
   push:
-    branches: ["main"] # Change to "master" if your default branch is master
+    branches: ["main"]
+
+# Add this block to give the action write access
+permissions:
+  contents: write
 
 jobs:
   build-and-deploy:
@@ -14,5 +18,5 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
-          folder: frontend # This tells GitHub to deploy ONLY the frontend folder
+          folder: frontend
           branch: gh-pages
