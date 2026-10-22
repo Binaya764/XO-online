@@ -16,13 +16,32 @@ boxes.forEach((box) => {
         if (box.innerText !== ""){
             return;
         }
+        if(turn_x){
+            box.innerText="X";
+            turn_x=false;
+        }else if(gameMode==="multiplayer"){
+            box.innerText = "O";
+            turn_x=true;
+
+        }else{
+            return;
+        }
+        box.disabled=true;
         moveCount++;
         console.log("box was clicked");
 
-        if(turn_x){
-            box.innerText = "X";
-            turn_x = false;
+      let win = check_winner();
+      if (win === "winner") {
+            setTimeout(() => winner_screen(), 1500);
+            console.log("winner screen called");
+        } else if ([...boxes].every((b) => b.innerText !== "")) {
+            setTimeout(() => draw_screen(), 1500);
+            console.log("draw");
+        } else {
             
+            if (!turn_x) {
+                document.querySelector(".container").style.pointerEvents = "none";
+
         
         if(gameMode == "easy" && !check_winner()){
             document.querySelector(".container").style.pointerEvents = "none";
@@ -41,23 +60,11 @@ boxes.forEach((box) => {
         }, 500);
 }
         
-        box.disabled = true;
-        let win = check_winner();
-        
-        if(win == "winner"){
-
-       setTimeout(()=>winner_screen(),3000);
-             console.log("winner screen called");
-           
-        }else{
-            if([...boxes].every((box)=> box.innerText !== ""))
-            setTimeout(()=>draw_screen(),2000);
-            console.log("draw")
-        }     
+       
     }
-    });
+    };
 });
-
+});
 
 function winner_screen(){
     
@@ -106,6 +113,7 @@ function reset_game(){
     document.getElementById('draw').style.display = 'none';
    
     turn_x = true;
+    moveCount=0;
 }
 
 function show_difficulty_menu(){
@@ -114,10 +122,11 @@ function show_difficulty_menu(){
 
 }
 function multiplayer(){
+    gameMode = "multiplayer";
     document.getElementById('main_menu').style.display = 'none';
     document.getElementById('difficulty').style.display = 'none';
     document.getElementById('game_screen').style.display = 'flex';
-
+    reset_game();
 }
 
 function start_game(mode){
@@ -232,7 +241,7 @@ function checkWinnerState(board) {
 
 async function saveGameResult(winnerName, totalMoves) {
     try {
-        const response = await fetchfetch('http://127.0.0.1:5000/game-result', {
+        const response = await fetch('http://127.0.0.1:5000/game-result', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
